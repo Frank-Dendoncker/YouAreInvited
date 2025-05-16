@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welkom</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="logo-container">
+    <img src="key.png" alt="Logo" id="logo" style="width: 150px; height: auto;">
+  </div>
+
+  <div id="timer-container">
+    <div id="welcome" class="golden-text"></div>
+    <div id="countdown"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "Gast";
+
+    const welcomeEl = document.getElementById("welcome");
+    welcomeEl.textContent = `Welcome, ${name}!`;
+
+    const targetDate = new Date("2025-06-10T00:00:00");
+    const countdownEl = document.getElementById("countdown");
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = "Tijd is verstreken!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.textContent = `${days}d ${hours}u ${minutes}m ${seconds}s`;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>

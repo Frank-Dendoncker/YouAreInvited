@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Private Invite</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="logo-container">
+  <img src="mole.png" alt="Logo" id="logo">
+</div>
+
+  <div id="access-container">
+    <h2>Enter your birthday and personal code</h2>
+    <form id="access-form">
+      <input type="text" id="dob" placeholder="DD-MM-YYYY" required>
+      <input type="text" id="code" placeholder="4-digit code" required>
+      <button type="submit">Check ID</button>
+    </form>
+    <p id="error" class="hidden">You are not invited! Try again.</p>
+  </div>
+
+  <div id="timer-container" class="hidden">
+    <div id="welcome"></div>
+    <div id="countdown"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
