@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Start het spel</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 30vh;
+    }
+    button {
+      padding: 1em 2em;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Klaar om te starten?</h1>
+  <button onclick="startGame()">Enter the game</button>
+
+  <script>
+    function startGame() {
+      const audio = new Audio('theme.mp3');
+      audio.loop = true;
+      audio.play();
+
+      // Start spel in zelfde venster
+      window.location.href = "timer.html";
+    }
+  </script>
+</body>
+</html>

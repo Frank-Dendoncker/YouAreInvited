@@ -34,7 +34,7 @@ document.getElementById("access-form").addEventListener("submit", function (e) {
     sessionStorage.setItem("username", validUsers[code].name);
 
     // Doorsturen naar audio pagina
-    window.location.href = "audio.html";
+    window.location.href = "launch.html";
   } else {
     error.textContent = "You are not invited! Try again.";
     error.classList.remove("hidden");
