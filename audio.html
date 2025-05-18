@@ -20,10 +20,26 @@
   </style>
 </head>
 <body>
-  <!-- Muziek die blijft spelen -->
-  <audio src="theme.mp3" autoplay loop></audio>
+  <!-- Muziek die via JS wordt gestart -->
+  <audio id="bg-music" src="theme.mp3" loop></audio>
 
   <!-- Laad het spel vanaf timer.html -->
   <iframe src="timer.html"></iframe>
+
+  <script>
+    // Probeer audio te starten zodra deze pagina geladen is na gebruikersactie
+    const music = document.getElementById('bg-music');
+
+    // Sommige browsers vereisen een expliciete play-aanroep
+    window.addEventListener('DOMContentLoaded', () => {
+      const playAudio = () => {
+        music.play().catch(() => {
+          // Indien nog geblokkeerd, wacht tot eerste user interaction
+          document.body.addEventListener('click', () => music.play(), { once: true });
+        });
+      };
+      playAudio();
+    });
+  </script>
 </body>
 </html>
