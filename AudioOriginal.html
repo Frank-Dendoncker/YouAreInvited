@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loading...</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      height: 100vh;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Muziek die via JS wordt gestart -->
+  <audio id="bg-music" src="theme.mp3" loop></audio>
+
+  <!-- Laad het spel vanaf timer.html -->
+  <iframe src="timer.html"></iframe>
+
+  <script>
+    // Probeer audio te starten zodra deze pagina geladen is na gebruikersactie
+    const music = document.getElementById('bg-music');
+
+    // Sommige browsers vereisen een expliciete play-aanroep
+    window.addEventListener('DOMContentLoaded', () => {
+      const playAudio = () => {
+        music.play().catch(() => {
+          // Indien nog geblokkeerd, wacht tot eerste user interaction
+          document.body.addEventListener('click', () => music.play(), { once: true });
+        });
+      };
+      playAudio();
+    });
+  </script>
+</body>
+</html>
