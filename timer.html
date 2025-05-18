@@ -8,20 +8,21 @@
 </head>
 <body>
   <div id="logo-container">
-    <img src="key.png" alt="Logo" id="logo" style="width: 100px; height: auto;">
+    <img src="key.png" alt="Logo" id="logo" style="width: 150px; height: auto;">
   </div>
 
   <div id="timer-container">
-    <div id="welcome" class="golden-text"></div>
+    <div id="welcome"></div>
     <div id="countdown"></div>
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name") || "Gast";
+    // Naam ophalen uit sessionStorage
+    const name = sessionStorage.getItem("username") || "gast";
 
     const welcomeEl = document.getElementById("welcome");
     welcomeEl.textContent = `Welcome, ${name}!`;
+    welcomeEl.classList.add("golden-text");
 
     const targetDate = new Date("2025-06-10T00:00:00");
     const countdownEl = document.getElementById("countdown");
@@ -31,7 +32,7 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.textContent = "Tijd is verstreken!";
+        window.location.href = "intro.html"; // <<< timer eindigt → intro pagina
         return;
       }
 

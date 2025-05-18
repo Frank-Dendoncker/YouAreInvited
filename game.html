@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spelers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bg-audio" src="theme.mp3" autoplay loop></audio>
+
+  <div id="logo-container">
+    <img src="mole.png" alt="Logo" id="logo">
+  </div>
+
+  <div id="timer-container">
+    <img id="player-photo" src="" alt="Speler" style="width: 60%; border-radius: 15px; margin-bottom: 20px;">
+    <div id="player-description" class="golden-text" style="font-size: 18px;"></div>
+  </div>
+
+  <script>
+    const players = [
+      { photo: "Luc.jpg", text: "Dit is speler 1, scherp van geest en rustig in de storm." },
+      { photo: "Bruno.jpg", text: "Speler 2 vertrouwt niemand, zelfs zichzelf niet." },
+      { photo: "Christian.jpg", text: "Een blik, een lach... en misschien wel een leugen." },
+      // Voeg hier meer spelers toe
+    ];
+
+    let index = 0;
+    const photoEl = document.getElementById("player-photo");
+    const descEl = document.getElementById("player-description");
+
+    function showPlayer() {
+      const player = players[index];
+      photoEl.src = player.photo;
+      descEl.textContent = player.text;
+      index++;
+
+      if (index < players.length) {
+        setTimeout(showPlayer, 20000);
+      } else {
+        descEl.textContent = "Einde introductie.";
+      }
+    }
+
+    showPlayer();
+  </script>
+</body>
+</html>

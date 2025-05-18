@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intro</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: black;
+      color: gold;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 60px;
+      text-align: center;
+    }
+
+    .intro-text {
+      font-size: 6vw;
+      margin: 10px 0;
+    }
+
+    #accept-btn {
+      background-color: gold;
+      color: black;
+      font-size: 20px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #mol-reveal {
+      opacity: 0;
+      font-size: 5vw;
+      margin-top: 60px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid gold;
+      width: 0;
+      animation: fadeIn 1s ease forwards 0.5s, typing 3s steps(25, end) 0.5s forwards;
+    }
+
+    #mol-img {
+      display: none;
+      width: 200px;
+      margin-top: 30px;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="intro-text">
+    <div class="intro-text">1 game</div>
+    <div class="intro-text">10 spelers</div>
+    <button id="accept-btn">ACCEPT</button>
+  </div>
+
+  <div id="mol-reveal" class="hidden">Maar ook een mol...</div>
+  <img src="mole.png" alt="De mol" id="mol-img" />
+
+  <script>
+    const button = document.getElementById("accept-btn");
+    const introText = document.getElementById("intro-text");
+    const molReveal = document.getElementById("mol-reveal");
+    const molImg = document.getElementById("mol-img");
+
+    button.addEventListener("click", () => {
+      introText.classList.add("hidden");
+      molReveal.classList.remove("hidden");
+
+      // Toon mol afbeelding iets later
+      setTimeout(() => {
+        molImg.style.display = "block";
+      }, 3000);
+
+      // Automatische overgang na 5 seconden
+      setTimeout(() => {
+        window.location.href = "game.html";
+      }, 10000);
+    });
+  </script>
+</body>
+</html>
