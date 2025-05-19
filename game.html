@@ -9,12 +9,13 @@
 <body>
   <audio id="bg-audio" src="theme.mp3" autoplay loop></audio>
 
+  
   <div id="logo-container">
-    <img src="mole.png" alt="Logo" id="logo">
+    <img src="mole.png" alt="De mol" id="mol-img" style="width: 80px; margin-top: 20px;">
   </div>
 
   <div id="timer-container">
-    <img id="player-photo" src="" alt="Speler" style="width: 40%; border-radius: 15px; margin-bottom: 10px;">
+    <img id="player-photo" src="" alt="Speler" style="width: 50%; border-radius: 15px; margin-bottom: 10px;">
     <div id="player-description" class="golden-text" style="font-size: 16px;"></div>
   </div>
 
@@ -44,7 +45,7 @@
       index++;
 
       if (index < players.length) {
-        setTimeout(showPlayer, 14000);
+        setTimeout(showPlayer, 10000);
       } else {
         descEl.textContent = "Einde introductie.";
       }
