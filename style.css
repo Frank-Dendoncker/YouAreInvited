@@ -14,11 +14,11 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 #logo {
-  width: 120px;
+  width: 110px;
   height: auto;
 }
 

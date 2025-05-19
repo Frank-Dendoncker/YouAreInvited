@@ -4,28 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Start het spel</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       background-color: black;
-      color: white;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
     }
 
-    #start-button {
-      padding: 1em 2em;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background-color: white;
+    #logo-container {
+      margin-top: 20px;
+    }
+
+    #logo {
+      width: 110px;
+      height: auto;
+    }
+
+    #intro {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #intro-text {
+      font-size: 5vw; /* kleiner voor smartphones */
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: gold;
+      background: linear-gradient(45deg, #FFD700, #FFA500, #FFFACD);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow:
+        0 1px 1px rgba(255, 215, 0, 0.8),
+        0 0 5px rgba(255, 223, 0, 0.7);
+    }
+
+    #continue-btn {
+      background-color: gold;
       color: black;
+      font-size: 20px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
       margin-top: 20px;
     }
 
@@ -39,30 +72,36 @@
 </head>
 <body>
 
+  <div id="logo-container">
+    <img src="mole.png" alt="Mol logo" id="logo">
+  </div>
+
   <div id="intro">
-    <h1>Klaar om te starten?</h1>
-    <button id="start-button">Enter the Game</button>
+    <div id="intro-text"></div>
+    <button id="continue-btn">Continue</button>
   </div>
 
   <audio id="bg-music" src="theme.mp3" preload="auto" loop></audio>
   <iframe id="game-frame"></iframe>
 
   <script>
-    const button = document.getElementById("start-button");
-    const intro = document.getElementById("intro");
+    const username = sessionStorage.getItem("username") || "Guest";
+    const introText = document.getElementById("intro-text");
+    const continueBtn = document.getElementById("continue-btn");
     const audio = document.getElementById("bg-music");
     const iframe = document.getElementById("game-frame");
+    const intro = document.getElementById("intro");
 
-    button.addEventListener("click", () => {
-      audio.load(); // Zorg dat hij klaar is
+    introText.textContent = `${username}, are you ready to play a game?`;
+
+    continueBtn.addEventListener("click", () => {
+      audio.load();
       audio.play().then(() => {
         console.log("🎵 Muziek speelt");
 
-        // Pas doorgaan naar spel na geslaagde muziekstart
         intro.style.display = "none";
         iframe.src = "timer.html";
         iframe.style.display = "block";
-
       }).catch(err => {
         console.error("⚠️ Muziek probleem:", err);
         alert("Klik opnieuw om muziek te starten.");

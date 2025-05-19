@@ -33,7 +33,6 @@ document.getElementById("access-form").addEventListener("submit", function (e) {
     // Optioneel: naam opslaan in sessionStorage
     sessionStorage.setItem("username", validUsers[code].name);
 
-    // Doorsturen naar audio pagina
     window.location.href = "launch.html";
   } else {
     error.textContent = "You are not invited! Try again.";
