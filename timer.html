@@ -17,35 +17,61 @@
   </div>
 
   <script>
-    // Naam ophalen uit sessionStorage
-    const name = sessionStorage.getItem("username") || "gast";
+  const name = sessionStorage.getItem("username") || "gast";
+  const welcomeEl = document.getElementById("welcome");
+  const countdownEl = document.getElementById("countdown");
 
-    const welcomeEl = document.getElementById("welcome");
-    welcomeEl.textContent = `Welcome, ${name}!`;
-    welcomeEl.classList.add("golden-text");
+  welcomeEl.textContent = `Welcome, ${name}!`;
+  welcomeEl.classList.add("golden-text");
 
-    const targetDate = new Date("2025-06-10T00:00:00");
-    const countdownEl = document.getElementById("countdown");
+  let targetDate;
 
-    function updateTimer() {
-      const now = new Date();
-      const diff = targetDate - now;
+  if (name.toLowerCase() === "frank") {
+    targetDate = new Date(Date.now() + 15_000); // 15 seconden
+  } else {
+    targetDate = new Date("2025-06-10T00:00:00"); // standaard
+  }
 
-      if (diff <= 0) {
-        window.location.href = "intro.html"; // <<< timer eindigt → intro pagina
-        return;
+  const timerInterval = setInterval(updateTimer, 1000);
+
+  function updateTimer() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    // console.log("Naam:", name);
+    // console.log("Diff:", diff);
+    // console.log("Parent !== window:", window.parent !== window);
+
+    if (diff <= 0) {
+      // console.log("Timer is afgelopen.");
+      clearInterval(timerInterval);
+
+      if (window.parent !== window) {
+        const frame = window.parent.document.getElementById("game-frame");
+        if (frame) {
+          frame.src = "intro.html";
+          // console.log("Redirected iframe naar intro.html");
+        } else {
+          console.warn("iframe 'game-frame' niet gevonden.");
+          window.location.href = "intro.html";
+        }
+      } else {
+        window.location.href = "intro.html";
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      countdownEl.textContent = `${days}d ${hours}u ${minutes}m ${seconds}s`;
+      return;
     }
 
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  </script>
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    countdownEl.textContent = `${days}d ${hours}u ${minutes}m ${seconds}s`;
+  }
+
+  updateTimer();
+</script>
 </body>
 </html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Audio Testpagina</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    button {
+      padding: 1em 2em;
+      font-size: 1.2rem;
+      margin: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Audio Test</h1>
+  <p>Gebruik de knoppen om de muziek te starten of stoppen.</p>
+
+  <audio id="bgm" src="theme.mp3" loop></audio>
+
+  <button onclick="startMusic()">▶️ Start muziek</button>
+  <button onclick="stopMusic()">⏹️ Stop muziek</button>
+
+  <script>
+    const audio = document.getElementById("bgm");
+
+    function startMusic() {
+      audio.play()
+        .then(() => console.log("🎵 Muziek speelt"))
+        .catch(err => console.error("Fout bij afspelen:", err));
+    }
+
+    function stopMusic() {
+      audio.pause();
+      audio.currentTime = 0;
+      console.log("🔇 Muziek gestopt");
+    }
+  </script>
+</body>
+</html>

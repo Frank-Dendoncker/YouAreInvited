@@ -3,37 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Test Audio</title>
+  <title>Muziek & Spel</title>
   <style>
     body, html {
       margin: 0;
       padding: 0;
       background: black;
-      overflow: hidden;
       height: 100vh;
+      overflow: hidden;
+    }
+    #overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
       color: white;
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-family: sans-serif;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+      font-size: 2em;
+      cursor: pointer;
     }
-    #message {
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
       display: none;
-      font-size: 1.5rem;
     }
   </style>
 </head>
 <body>
-  <!-- 🎵 Muziek die zou moeten starten -->
-  <audio src="theme.mp3" autoplay loop></audio>
 
-  <!-- 🔕 Bericht verschijnt pas na 10 seconden -->
-  <div id="message">Audio-test klaar (10 sec voorbij)</div>
+  <div id="overlay">
+    🎵 Klik om te starten 🎵
+  </div>
+
+  <audio id="bg-music" src="theme.mp3" loop></audio>
+  <iframe id="game-frame" src="timer.html"></iframe>
 
   <script>
-    setTimeout(() => {
-      document.getElementById("message").style.display = "block";
-    }, 10000); // 10 seconden wachten
+    const overlay = document.getElementById("overlay");
+    const audio = document.getElementById("bg-music");
+    const iframe = document.getElementById("game-frame");
+
+    overlay.addEventListener("click", () => {
+      audio.play().then(() => {
+        overlay.style.display = "none";
+        iframe.style.display = "block";
+      }).catch((err) => {
+        console.error("Kon muziek niet starten:", err);
+        overlay.textContent = "Klik opnieuw om muziek te starten";
+      });
+    });
   </script>
+
 </body>
 </html>
+

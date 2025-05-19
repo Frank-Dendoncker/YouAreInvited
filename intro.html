@@ -95,7 +95,7 @@
 
       // Automatische overgang na 5 seconden
       setTimeout(() => {
-        window.location.href = "game.html";
+        window.parent.document.getElementById("game-frame").src = "game.html";
       }, 10000);
     });
   </script>

@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Start het spel</title>
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       background-color: black;
       color: white;
       font-family: sans-serif;
-      text-align: center;
-      padding-top: 30vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
-    button {
+
+    #start-button {
       padding: 1em 2em;
       font-size: 1.2em;
       border: none;
@@ -20,22 +26,49 @@
       cursor: pointer;
       background-color: white;
       color: black;
+      margin-top: 20px;
+    }
+
+    #game-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Klaar om te starten?</h1>
-  <button onclick="startGame()">Enter the game</button>
+
+  <div id="intro">
+    <h1>Klaar om te starten?</h1>
+    <button id="start-button">Enter the Game</button>
+  </div>
+
+  <audio id="bg-music" src="theme.mp3" preload="auto" loop></audio>
+  <iframe id="game-frame"></iframe>
 
   <script>
-    function startGame() {
-      const audio = new Audio('theme.mp3');
-      audio.loop = true;
-      audio.play();
+    const button = document.getElementById("start-button");
+    const intro = document.getElementById("intro");
+    const audio = document.getElementById("bg-music");
+    const iframe = document.getElementById("game-frame");
 
-      // Start spel in zelfde venster
-      window.location.href = "timer.html";
-    }
+    button.addEventListener("click", () => {
+      audio.load(); // Zorg dat hij klaar is
+      audio.play().then(() => {
+        console.log("🎵 Muziek speelt");
+
+        // Pas doorgaan naar spel na geslaagde muziekstart
+        intro.style.display = "none";
+        iframe.src = "timer.html";
+        iframe.style.display = "block";
+
+      }).catch(err => {
+        console.error("⚠️ Muziek probleem:", err);
+        alert("Klik opnieuw om muziek te starten.");
+      });
+    });
   </script>
+
 </body>
 </html>
