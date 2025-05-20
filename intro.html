@@ -71,33 +71,51 @@
 
   <div id="intro-text">
     <div class="intro-text">1 game</div>
-    <div class="intro-text">10 spelers</div>
+    <div class="intro-text">10 players</div>
     <button id="accept-btn">ACCEPT</button>
   </div>
+
+  <div id="password-message" class="hidden" style="font-size: 6vw; margin-top: 20px; transition: opacity 2s ease;"></div>
 
   <div id="mol-reveal" class="hidden">Maar ook een mol...</div>
   <img src="mole.png" alt="De mol" id="mol-img" />
 
   <script>
-    const button = document.getElementById("accept-btn");
-    const introText = document.getElementById("intro-text");
-    const molReveal = document.getElementById("mol-reveal");
-    const molImg = document.getElementById("mol-img");
+  const button = document.getElementById("accept-btn");
+  const introText = document.getElementById("intro-text");
+  const molReveal = document.getElementById("mol-reveal");
+  const molImg = document.getElementById("mol-img");
+  const passwordMessage = document.getElementById("password-message");
 
-    button.addEventListener("click", () => {
-      introText.classList.add("hidden");
-      molReveal.classList.remove("hidden");
+  button.addEventListener("click", () => {
+    // 1. Hide Accept button
+    button.style.display = "none";
 
-      // Toon mol afbeelding iets later
-      setTimeout(() => {
-        molImg.style.display = "block";
-      }, 3000);
+    // 2. Get user + password from session
+    const username = sessionStorage.getItem("username") || "Speler";
+    const password = sessionStorage.getItem("password") || "0000";
 
-      // Automatische overgang na 5 seconden
-      setTimeout(() => {
-        window.parent.document.getElementById("game-frame").src = "game.html";
-      }, 10000);
-    });
-  </script>
+    // 3. Show personal message
+    passwordMessage.textContent = `${username}, your personal password is ${password}.`;
+    passwordMessage.classList.remove("hidden");
+
+    // 4. Fade out message after 5 seconds
+    setTimeout(() => {
+      passwordMessage.style.opacity = "0";
+    }, 5000);
+
+    // 5. Start the rest of the intro flow
+    introText.classList.add("hidden");
+    molReveal.classList.remove("hidden");
+
+    setTimeout(() => {
+      molImg.style.display = "block";
+    }, 3000);
+
+    setTimeout(() => {
+      window.parent.document.getElementById("game-frame").src = "game.html";
+    }, 10000);
+  });
+</script>
 </body>
 </html>
