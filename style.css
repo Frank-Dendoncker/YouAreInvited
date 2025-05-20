@@ -72,13 +72,13 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start; /* belangrijk: zorgt dat content bovenaan begint */
-  margin-top: 40px;
-  height: 100vh; /* zorgt dat het de hele hoogte benut */
+  margin-top: 10px;
+  height: 60vh; /* zorgt dat het de hele hoogte benut */
 }  
 
 #mol-img {
   display: block;
-  width: 200px;
+  width: 100px;
   margin-bottom: 20px;
 }
 
