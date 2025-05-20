@@ -85,7 +85,6 @@ button {
   overflow: hidden;
   border-right: 2px solid gold;
   width: 0;
-  animation: fadeIn 1s ease forwards 0.5s, typing 3s steps(25, end) 0.5s forwards;
 }
 
 #timer-container {
@@ -128,3 +127,8 @@ h2 {
   margin-bottom: 20px;
   text-align: center;
 }
+
+.reveal-animate {
+  animation: fadeIn 1s ease forwards 0.5s, typing 3s steps(25, end) 0.5s forwards;
+}
+
