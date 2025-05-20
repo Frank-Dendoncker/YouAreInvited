@@ -36,20 +36,41 @@
       margin-top: 20px;
     }
 
+    #password-message {
+      font-size: 6vw;
+      margin-top: 20px;
+      transition: opacity 2s ease;
+    }
+
+    #mol-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 10px;
+      height: 100vh;
+    }
+
+    #mol-img {
+      display: block;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
     #mol-reveal {
-      opacity: 0;
       font-size: 9vw;
-      margin-top: 60px;
       white-space: nowrap;
       overflow: hidden;
       border-right: 2px solid gold;
       width: 0;
     }
 
-    #mol-img {
+    .hidden {
       display: none;
-      width: 200px;
-      margin-top: 30px;
+    }
+
+    .reveal-animate {
+      animation: fadeIn 1s ease forwards 0.5s, typing 3s steps(25, end) 0.5s forwards;
     }
 
     @keyframes fadeIn {
@@ -59,10 +80,6 @@
     @keyframes typing {
       from { width: 0; }
       to { width: 100%; }
-    }
-
-    .hidden {
-      display: none;
     }
   </style>
 </head>
@@ -74,57 +91,56 @@
     <button id="accept-btn">ACCEPT</button>
   </div>
 
-  <div id="password-message" class="hidden" style="font-size: 6vw; margin-top: 20px; transition: opacity 2s ease;"></div>
+  <div id="password-message" class="hidden"></div>
 
-  
   <div id="mol-container" class="hidden">
     <img src="mole.png" alt="De mol" id="mol-img" />
     <div id="mol-reveal">Juist, er is ook een mol...</div>
   </div>
 
   <script>
-  const button = document.getElementById("accept-btn");
-  const introText = document.getElementById("intro-text");
-  const molReveal = document.getElementById("mol-reveal");
-  const molImg = document.getElementById("mol-img");
-  const passwordMessage = document.getElementById("password-message");
-  const molContainer = document.getElementById("mol-container");
+    const button = document.getElementById("accept-btn");
+    const introText = document.getElementById("intro-text");
+    const molReveal = document.getElementById("mol-reveal");
+    const molImg = document.getElementById("mol-img");
+    const passwordMessage = document.getElementById("password-message");
+    const molContainer = document.getElementById("mol-container");
 
-  button.addEventListener("click", () => {
-    // 1. Hide Accept button
-    button.style.display = "none";
+    button.addEventListener("click", () => {
+      // 1. Hide Accept button
+      button.style.display = "none";
 
-    // 2. Get user + password from session
-    const username = sessionStorage.getItem("username") || "Speler";
-    const password = sessionStorage.getItem("password") || "0000";
+      // 2. Get user + password from session
+      const username = sessionStorage.getItem("username") || "Speler";
+      const password = sessionStorage.getItem("password") || "0000";
 
-    // 3. Show personal message
-    passwordMessage.textContent = `${username}, your personal password is ${password}.`;
-    passwordMessage.classList.remove("hidden");
-    passwordMessage.style.opacity = "1"; // Zorg dat het zichtbaar is
+      // 3. Show personal message
+      passwordMessage.textContent = `${username}, your personal password is ${password}.`;
+      passwordMessage.classList.remove("hidden");
+      passwordMessage.style.opacity = "1";
 
-    // 4. Fade out message after 5 seconds
-  setTimeout(() => {
-  passwordMessage.style.opacity = "0";
+      // 4. Fade out message after 5 seconds
+      setTimeout(() => {
+        passwordMessage.style.opacity = "0";
 
-  // 5. 2 seconden na verdwijnen wachtwoord: mol reveal
-  setTimeout(() => {
-    introText.classList.add("hidden");
-    molContainer.classList.remove("hidden");
-    molReveal.classList.add("reveal-animate");
-    molImg.style.display = "block";
+        // 5. 2 seconden na verdwijnen wachtwoord: mol reveal
+        setTimeout(() => {
+          introText.classList.add("hidden");
+          molContainer.classList.remove("hidden");
 
-    // 6. 10 seconden na mol-reveal pas naar game.html
-    setTimeout(() => {
-      window.parent.document.getElementById("game-frame").src = "game.html";
-    }, 10000); // pas hier start de echte overgang
+          // Start animatie
+          molReveal.classList.add("reveal-animate");
 
-  }, 2000); // wacht 2s na fade-out
+          // 6. 10 seconden na mol-reveal pas naar game.html
+          setTimeout(() => {
+            window.parent.document.getElementById("game-frame").src = "game.html";
+          }, 10000);
 
-  }, 5000); // wacht 5s voor fade-out
+        }, 2000); // wacht 2s na fade-out
 
-  });
-</script>
+      }, 5000); // wacht 5s voor fade-out
+    });
+  </script>
 
 </body>
 </html>
