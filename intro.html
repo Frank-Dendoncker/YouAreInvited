@@ -101,21 +101,24 @@
     passwordMessage.style.opacity = "1"; // Zorg dat het zichtbaar is
 
     // 4. Fade out message after 5 seconds
-    setTimeout(() => {
-      passwordMessage.style.opacity = "0";
+  setTimeout(() => {
+  passwordMessage.style.opacity = "0";
 
-      // 5. 2 seconden na verdwijnen wachtwoord: mol reveal
-      setTimeout(() => {
-        introText.classList.add("hidden");
-        molReveal.classList.remove("hidden");
-        molImg.style.display = "block";
-      }, 2000); // wacht 2 seconden ná het verdwijnen
-    }, 5000); // wacht 5 seconden voor fade out
+  // 5. 2 seconden na verdwijnen wachtwoord: mol reveal
+  setTimeout(() => {
+    introText.classList.add("hidden");
+    molReveal.classList.remove("hidden");
+    molImg.style.display = "block";
 
-    // 6. Doorgaan naar game.html na totaal 10 seconden
+    // 6. 10 seconden na mol-reveal pas naar game.html
     setTimeout(() => {
       window.parent.document.getElementById("game-frame").src = "game.html";
-    }, 10000);
+    }, 10000); // pas hier start de echte overgang
+
+  }, 2000); // wacht 2s na fade-out
+
+  }, 5000); // wacht 5s voor fade-out
+
   });
 </script>
 
