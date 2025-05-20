@@ -77,7 +77,7 @@
 
   <div id="password-message" class="hidden" style="font-size: 6vw; margin-top: 20px; transition: opacity 2s ease;"></div>
 
-  <div id="mol-reveal" class="hidden">Maar ook een mol...</div>
+  <div id="mol-reveal" class="hidden">Juist, er is ook een mol...</div>
   <img src="mole.png" alt="De mol" id="mol-img" />
 
   <script>
@@ -98,24 +98,26 @@
     // 3. Show personal message
     passwordMessage.textContent = `${username}, your personal password is ${password}.`;
     passwordMessage.classList.remove("hidden");
+    passwordMessage.style.opacity = "1"; // Zorg dat het zichtbaar is
 
     // 4. Fade out message after 5 seconds
     setTimeout(() => {
       passwordMessage.style.opacity = "0";
-    }, 5000);
 
-    // 5. Start the rest of the intro flow
-    introText.classList.add("hidden");
-    molReveal.classList.remove("hidden");
+      // 5. 2 seconden na verdwijnen wachtwoord: mol reveal
+      setTimeout(() => {
+        introText.classList.add("hidden");
+        molReveal.classList.remove("hidden");
+        molImg.style.display = "block";
+      }, 2000); // wacht 2 seconden ná het verdwijnen
+    }, 5000); // wacht 5 seconden voor fade out
 
-    setTimeout(() => {
-      molImg.style.display = "block";
-    }, 3000);
-
+    // 6. Doorgaan naar game.html na totaal 10 seconden
     setTimeout(() => {
       window.parent.document.getElementById("game-frame").src = "game.html";
     }, 10000);
   });
 </script>
+
 </body>
 </html>
