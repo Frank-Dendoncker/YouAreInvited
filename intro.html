@@ -78,15 +78,18 @@
   <div id="password-message" class="hidden" style="font-size: 6vw; margin-top: 20px; transition: opacity 2s ease;"></div>
 
   
+  <div id="mol-container" class="hidden">
   <img src="mole.png" alt="De mol" id="mol-img" />
-  <div id="mol-reveal" class="hidden">Juist, er is ook een mol...</div>
-  
+  <div id="mol-reveal">Juist, er is ook een mol...</div>
+  </div>
+
   <script>
   const button = document.getElementById("accept-btn");
   const introText = document.getElementById("intro-text");
   const molReveal = document.getElementById("mol-reveal");
   const molImg = document.getElementById("mol-img");
   const passwordMessage = document.getElementById("password-message");
+  const molContainer = document.getElementById("mol-container");
 
   button.addEventListener("click", () => {
     // 1. Hide Accept button
@@ -108,8 +111,8 @@
   // 5. 2 seconden na verdwijnen wachtwoord: mol reveal
   setTimeout(() => {
     introText.classList.add("hidden");
-    molReveal.classList.remove("hidden");
-    molImg.style.display = "block";
+    const molContainer = document.getElementById("mol-container");
+    molContainer.classList.remove("hidden");
 
     // 6. 10 seconden na mol-reveal pas naar game.html
     setTimeout(() => {
