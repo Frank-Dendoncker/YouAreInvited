@@ -44,7 +44,6 @@
       overflow: hidden;
       border-right: 2px solid gold;
       width: 0;
-      animation: fadeIn 1s ease forwards 0.5s, typing 3s steps(25, end) 0.5s forwards;
     }
 
     #mol-img {
@@ -111,7 +110,6 @@
   // 5. 2 seconden na verdwijnen wachtwoord: mol reveal
   setTimeout(() => {
     introText.classList.add("hidden");
-    const molContainer = document.getElementById("mol-container");
     molContainer.classList.remove("hidden");
     molReveal.classList.add("reveal-animate");
 
