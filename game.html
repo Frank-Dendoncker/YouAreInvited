@@ -44,11 +44,13 @@
       descEl.textContent = player.text;
       index++;
 
-      if (index < players.length) {
-        setTimeout(showPlayer, 10000);
-      } else {
+    if (index < players.length) {
+      setTimeout(showPlayer, 10000);
+    } else if (index === players.length) {
+      setTimeout(() => {
         descEl.textContent = "Einde introductie.";
-      }
+      }, 10000);
+     }
     }
 
     showPlayer();
